@@ -2,5 +2,20 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "baseBranches": [
+    "main",
+    "stable"
+  ],
+  "cloneSubmodules": true,
+  "packageRules": [
+    {
+      "matchManagers": ["gomod"],
+      "postUpgradeTasks": {
+        "commands": ["pwd"],
+        "fileFilters": ["**/**"],
+        "executionMode": "branch"
+      }
+    }
   ]
 }
