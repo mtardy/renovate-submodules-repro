@@ -18,6 +18,8 @@ version between branches.
 8. renovate save the files as part of post-upgrade since git sees a difference (submodules points to commit A now instead of B.).
 9. the PR includes an unwanted (and wrong) submodule change.
 
+### Result
+
 The following is the debug log we get when renovate saves this *wrong* file:
 ```
 DEBUG: Post-upgrade file saved (branch="renovate/stable-golang.org-x-sys-0.x")
@@ -28,6 +30,11 @@ DEBUG: Post-upgrade file saved (branch="renovate/stable-golang.org-x-sys-0.x")
   "pattern": "**/**"
 }
 ```
+
+See the third file included in the [stable branch PR dep upgrade](https://github.com/mtardy/renovate-submodules-repro/pull/5/files):
+<img width="1243" alt="image" src="https://github.com/mtardy/renovate-submodules-repro/assets/11256051/147547be-2b5d-4adb-a2a8-2b17022b17ab">
+
+### Configuration
 
 The minimal configuration for this is:
 ```json
@@ -70,10 +77,12 @@ This makes sure that when you checkout to another branch you also point your
 submodules to the correct commit, basically automating doing `git checkout
 another-branch --recurse-submodules`.
 
-#### Workaround
+### Workaround
 
 I just realized by writing this that I could write a workaround using a
 different `fileFilters` excluding the submodule file.
+
+---
 
 ## Original message
 
